@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>1998年到港航班延误时间为0的次数排名</title>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+     <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type="text/javascript">
+    	 require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+         require(
+            [
+                'echarts',
+                'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                
+                
+
+var seriesLabel = {
+    normal: {
+        show: true,
+        textBorderColor: '#333',
+        textBorderWidth: 2
+    }
+}
+
+option = {
+    title: {
+        text: '1998年到港航班延误时间为0的次数排名'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['延误为零的次数', '总到港次数', '准时率(%)']
+    },
+    grid: {
+        left: 50
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'value',
+        name: '',
+        axisLabel: {
+            formatter: '{value}'
+        }
+    },
+    yAxis: {
+        type: 'category',
+        inverse: true,
+        data: ['ORD', 'PHX', 'LAS','ATL','DFW','LAX','DAL','STL','OAK','HOU'],
+        axisLabel: {
+            formatter: function (value) {
+                return  value ;
+            },
+            margin: 20,
+            rich: {
+                value: {
+                    lineHeight: 30,
+                    align: 'center'
+                },
+                
+            }
+        }
+    },
+    series: [
+        {
+            name: '延误为零的次数',
+            type: 'bar',
+            data: [8636, 10418, 8253, 8294, 7853, 8057, 6399, 6609, 5327, 6112],
+            label: seriesLabel,
+            markPoint: {
+                symbolSize: 1,
+                symbolOffset: [0, '50%'],
+                label: {
+                   normal: {
+                        formatter: '{a|{a}\n}{b|{b} }{c|{c}}',
+                        backgroundColor: 'rgb(242,242,242)',
+                        borderColor: '#aaa',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        padding: [4, 10],
+                        lineHeight: 26,
+                        // shadowBlur: 5,
+                        // shadowColor: '#000',
+                        // shadowOffsetX: 0,
+                        // shadowOffsetY: 1,
+                        position: 'right',
+                        distance: 20,
+                        rich: {
+                            a: {
+                                align: 'center',
+                                color: '#fff',
+                                fontSize: 18,
+                                textShadowBlur: 2,
+                                textShadowColor: '#000',
+                                textShadowOffsetX: 0,
+                                textShadowOffsetY: 1,
+                                textBorderColor: '#333',
+                                textBorderWidth: 2
+                            },
+                            b: {
+                                 color: '#333'
+                            },
+                            c: {
+                                color: '#ff8811',
+                                textBorderColor: '#000',
+                                textBorderWidth: 1,
+                                fontSize: 22
+                            }
+                        }
+                   }
+                },
+                data: [
+                    
+                ]
+            }
+        },
+        {
+            name: '总到港次数',
+            type: 'bar',
+            label: seriesLabel,
+            data: [294910, 170964, 119417, 255287, 244049, 184129, 48238, 176001, 56007, 57146]
+        },
+        {
+            name: '准时率(%)',
+            type: 'bar',
+            label: seriesLabel,
+            data: [0.03, 0.06, 0.07, 0.03, 0.03, 0.04, 0.13, 0.04, 0.10, 0.11]
+        }
+    ]
+};
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+</body>

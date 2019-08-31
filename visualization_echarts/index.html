@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8">
+</script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+	<script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+
+		 require(
+            [
+                'echarts',
+                'echarts/chart/line'  
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                
+                option = {
+                	    tooltip : {
+                	        trigger: 'axis'
+                	    },
+                	    legend: {
+                	        data:['1998年飞机离港时间在不同时间段的航班总数(单位：架次)']
+                	    },
+                	    toolbox: {
+                	        show : true,
+                	        feature : {
+                	            mark : {show: true},
+                	            dataView : {show: true, readOnly: false},
+                	            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                	            restore : {show: true},
+                	            saveAsImage : {show: true}
+                	        }
+                	    },
+                	    calculable : true,
+                	    xAxis : [
+                	        {
+                	            type : 'category',
+                	            boundaryGap : false,
+                	            data : ['凌晨','早上','中午','下午','晚上' ]
+                	        }
+                	    ],
+                	    yAxis : [
+                	        {
+                	            type : 'value'
+                	        }
+                	    ],
+                	    series : [
+                	        {
+                	            name:'航班数量',
+                	            type:'line',
+                	            stack: '总量',
+                	            data:[95609, 1356693, 1294730, 1595129, 897483]
+                	        }
+                	    ]
+                	};
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+</body>
+</html>

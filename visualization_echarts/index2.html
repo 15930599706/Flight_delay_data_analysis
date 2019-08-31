@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8">
+</script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+	<script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+
+		 require(
+            [
+                'echarts',
+                'echarts/chart/line'  
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                
+                option = {
+                	    tooltip : {
+                	        trigger: 'axis'
+                	    },
+                	    legend: {
+                	        data:['凌晨','早上','中午','下午','晚上']
+                	    },
+                	    toolbox: {
+                	        show : true,
+                	        feature : {
+                	            mark : {show: true},
+                	            dataView : {show: true, readOnly: false},
+                	            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                	            restore : {show: true},
+                	            saveAsImage : {show: true}
+                	        }
+                	    },
+                	    calculable : true,
+                	    xAxis : [
+                	        {
+                	            type : 'category',
+                	            boundaryGap : false,
+                	            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                	        }
+                	    ],
+                	    yAxis : [
+                	        {
+                	            type : 'value'
+                	        }
+                	    ],
+                	    series : [
+                	        {
+                	            name:'凌晨',
+                	            type:'line',
+                	            stack: '总量',
+                	            data:[254,256,253,258,256,293,283,281,245,259,251,256]
+                	        },
+                	        {
+                	            name:'早上',
+                	            type:'line',
+                	            stack: '总量',
+                	            data:[3632,3711,3725,3801,3692,3743,3794,3778,3550,3789,3717,3669]
+                	        },
+                	        {
+                	            name:'中午',
+                	            type:'line',
+                	            stack: '总量',
+                	            data:[3497,3546,3565,3574,3521,3540,3602,3590,3401,3601,3571,3553]
+                	        },
+                	        {
+                	            name:'下午',
+                	            type:'line',
+                	            stack: '总量',
+                	            data:[4357,4400,4437,4428,4314,4305,4391,4355,4219,4444,4402,4389]
+                	        },
+                	        {
+                	            name:'晚上',
+                	            type:'line',
+                	            stack: '总量',
+                	            data:[2391,2454,2529,2461,2406,2569,2545,2548,2283,2427,2394,2493]
+                	        }
+                	    ]
+                	};
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+</body>
+</html>
